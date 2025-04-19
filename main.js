@@ -1,28 +1,52 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
+// Tauri窗口配置
+console.log('窗口加载 - 开始初始化');
 
-function createWindow() {
-  // 创建浏览器窗口
-  const win = new BrowserWindow({
-    width: 1280,
-    height: 720,
-    icon: path.join(__dirname, 'icon.png'), // 设置窗口图标
-    title: 'DoIt!',                // 修改窗口标题
-    autoHideMenuBar: true,                // 隐藏工具栏（按 Alt 可临时显示）
-    webPreferences: {
-      nodeIntegration: true               // 允许渲染进程使用 Node.js
-    }
-  });
+// 隐藏Windows默认导航按钮
+document.documentElement.style.setProperty('--window-controls-visibility', 'none');
 
-  // 加载本地 HTML 文件
-  win.loadFile('index.html');
-}
+// 设置视口尺寸
+document.documentElement.style.width = '100%';
+document.documentElement.style.height = '100%';
+document.title = 'DoItX';
 
-app.whenReady().then(createWindow);
-
-// 关闭所有窗口时退出应用（macOS 除外）
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+// 监听窗口大小变化
+window.addEventListener('resize', () => {
+  document.documentElement.style.width = '100%';
+  document.documentElement.style.height = '100%';
 });
+
+// 监听DOM加载完成
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('窗口加载完成 - DOMContentLoaded事件触发');
+});
+
+// 监听窗口获得焦点
+window.addEventListener('focus', () => {
+  console.log('窗口获得焦点');
+});
+
+console.log('窗口事件监听器已设置');
+import { appWindow } from '@tauri-apps/api/window'
+// 测试Tauri命令调用
+
+window.__TAURI__.invoke('greet', { name: 'World' })
+  .then(response => console.log('后端响应:', response))
+  .catch(error => console.error('调用失败:', error));
+
+
+// 只在Tauri环境下添加自定义导航按钮
+if (window.__TAURI__) {
+  const navButtons = document.createElement('div');
+  navButtons.className = 'custom-nav-buttons';
+  navButtons.innerHTML = `
+    <button class="nav-btn minimize">—</button>
+    <button class="nav-btn maximize">□</button>
+    <button class="nav-btn close">×</button>
+  `;
+  document.body.appendChild(navButtons);
+
+
+document.querySelector('.nav-btn.minimize').addEventListener('click', () => appWindow.minimize());
+document.querySelector('.nav-btn.maximize').addEventListener('click', () => appWindow.toggleMaximize());
+document.querySelector('.nav-btn.close').addEventListener('click', () => appWindow.close());
+}

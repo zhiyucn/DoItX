@@ -353,7 +353,7 @@ export function text_prompt_ext(
     // External message.
     msg = generator.valueToCode(block, 'TEXT', Order.NONE) || "''";
   }
-  let code = 'window.prompt(' + msg + ')';
+  let code = 'CustomDialog.prompt(' + msg + ', "", function(result) { return result; })';
   const toNumber = block.getFieldValue('TYPE') === 'NUMBER';
   if (toNumber) {
     code = 'Number(' + code + ')';

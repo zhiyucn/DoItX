@@ -347,23 +347,13 @@ export function renameVariable(
  * @param callback A callback. It will be passed the new variable name, or null
  *     if the user picked something illegal.
  */
-export function promptName(
+export async function promptName(
   promptText: string,
   defaultText: string,
   callback: (p1: string | null) => void,
 ) {
-  dialog.prompt(promptText, defaultText, function (newVar) {
-    // Merge runs of whitespace.  Strip leading and trailing whitespace.
-    // Beyond this, all names are legal.
-    if (newVar) {
-      newVar = newVar.replace(/[\s\xa0]+/g, ' ').trim();
-      if (newVar === Msg['RENAME_VARIABLE'] || newVar === Msg['NEW_VARIABLE']) {
-        // Ok, not ALL names are legal...
-        newVar = null;
-      }
-    }
-    callback(newVar);
-  });
+  const result = window.prompt(promptText, defaultText);
+  callback(result);
 }
 /**
  * Check whether there exists a variable with the given name but a different

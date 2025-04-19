@@ -1,37 +1,38 @@
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
+/* 修改为Material You风格 2025/4/20 UTC+8 zhiyucn */
 :root {
-  --bg-color: #f5f5f5;
-  --text-color: #333;
-  --toolbar-bg: #66ccff;
-  --toolbar-text: white;
-  --output-bg: white;
-  --border-color: #ccc;
-  --dropdown-bg: #f9f9f9;
-  --dropdown-hover: #ddd;
-  --highlight-color: #e6f2ff;
-  --console-bg: #1e1e1e;
-  --console-text: #e0e0e0;
-  --console-border: #444;
+  --bg-color: #FEF7FF;
+  --text-color: #1D1B20;
+  --toolbar-bg: #6750A4;
+  --toolbar-text: #FFFFFF;
+  --output-bg: #FFFFFF;
+  --border-color: #79747E;
+  --dropdown-bg: #F3EDF7;
+  --dropdown-hover: #E8DEF8;
+  --highlight-color: #EADDFF;
+  --console-bg: #1C1B1F;
+  --console-text: #E6E1E5;
+  --console-border: #49454F;
 }
 
 .night-mode {
-  --bg-color: #1e1e1e;
-  --text-color: #e0e0e0;
-  --toolbar-bg: #2d2d2d;
-  --toolbar-text: #e0e0e0;
+  --bg-color: #1C1B1F;
+  --text-color: #E6E1E5;
+  --toolbar-bg: #4F378B;
+  --toolbar-text: #FFFFFF;
   --output-bg: #252526;
-  --border-color: #444;
-  --dropdown-bg: #2d2d2d;
-  --dropdown-hover: #3d3d3d;
-  --highlight-color: #2a2d2e;
-  --console-bg: #252526;
-  --console-text: #e0e0e0;
-  --console-border: #666;
+  --border-color: #938F99;
+  --dropdown-bg: #211F26;
+  --dropdown-hover: #4A4458;
+  --highlight-color: #381E72;
+  --console-bg: #141218;
+  --console-text: #E6E1E5;
+  --console-border: #938F99;
 }
 
 body {
@@ -52,15 +53,15 @@ body {
 }
 
 .toolbar {
-  height: 48px; 
+  height: 64px;
   box-sizing: border-box;
-  padding: 0;
+  padding: 0 16px;
   gap: 8px;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   color: var(--toolbar-text);
   background-color: var(--toolbar-bg);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px 1px rgba(0,0,0,0.15), 0 1px 2px rgba(0,0,0,0.3);
   position: relative;
   z-index: 100;
 }
@@ -120,9 +121,9 @@ body {
   position: absolute;
   background-color: var(--dropdown-bg);
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px 2px rgba(0,0,0,0.15), 0 1px 2px rgba(0,0,0,0.3);
   z-index: 1;
-  border-radius: 4px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
@@ -271,6 +272,7 @@ body {
   margin-left: auto;
   margin-right: 10px;
   align-items: stretch;
+  position: relative;
 }
 
 .about-btn {
@@ -300,6 +302,61 @@ body {
   z-index: 1;
   border-radius: 4px;
   overflow: hidden;
+
+.custom-prompt-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--dropdown-bg);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.prompt-message {
+  margin-bottom: 15px;
+  color: var(--text-color);
+}
+
+.prompt-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid var(--console-border);
+  border-radius: 4px;
+  background-color: var(--dropdown-bg);
+  color: var(--text-color);
+}
+
+.prompt-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.prompt-buttons button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.prompt-ok {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.prompt-cancel {
+  background-color: #f44336;
+  color: white;
+}
+  margin-top: 8px; /* 增加过渡区域 */
+}
+
+.about-dropdown:hover .about-dropdown-content {
+  display: block;
 }
 
 .about-dropdown-content button {
@@ -325,18 +382,26 @@ body {
 
 .blocklyToolboxDiv {
   background-color: var(--dropdown-bg) !important;
+  border-radius: 12px;
+  margin: 8px;
+  box-shadow: 0 1px 3px 1px rgba(0,0,0,0.15), 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .blocklyTreeLabel {
   color: var(--text-color) !important;
+  padding: 8px 12px;
 }
 
 .blocklyTreeRow {
   background-color: var(--dropdown-bg) !important;
+  margin: 4px 8px;
+  border-radius: 8px;
+  transition: all 0.2s;
 }
 
 .blocklyTreeRow:hover {
   background-color: var(--dropdown-hover) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .blocklyMainBackground {

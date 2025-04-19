@@ -64,6 +64,11 @@ function registerPythonGenerators() {
         const value = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_NONE) || 'None';
         return `${varName} = ${value}\n`;
     };
+    // 添加字符串转换为大写的代码生成器，但是好像用不用了 2025/4/20 UTC+8 zhiyucn
+    Blockly.Python['python_string_upper'] = function(block) {
+        const value = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_NONE) || "''";
+        return `${value}.upper()`;
+    };
 }
 
 // 更新 Python 代码显示
@@ -73,7 +78,7 @@ function updatePythonCode() {
         document.getElementById('pythonCode').textContent = code;
     } catch (error) {
         console.error('代码生成错误:', error);
-        document.getElementById('pythonCode').textContent = `# 错误: ${error.message}`;
+        document.getElementById('pythonCode').textContent = `# 天哪！出现了一个错误！错误原因： ${error.message}`;
     }
 }
 
@@ -198,11 +203,11 @@ function toggleTheme() {
 }
 
 function showAboutSoftware() {
-    alert('DoIt! - 放手去做!\n版本: 1.0.0');
+    alert('DoItX! - 放手去做!\n版本: 1.0.0 GPLv2');
 }
-
+// 添加我的二改信息 2025/4/20 UTC+8 zhiyucn
 function showAboutDeveloper() {
-    alert('开发者信息:\nCyberexplorer(程序)\n_KOSHINO_(美工)');
+    alert('开发者信息:\n原DoIt:\nCyberexplorer(程序)\n_KOSHINO_(美工)\nDoItX(当前版本):\nzhiyucn(程序)');
 }
 
 function setupZoomControls() {

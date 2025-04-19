@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .dialog-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .dialog-box {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      max-width: 80%;
+      min-width: 300px;
+    }
+    .dialog-message {
+      margin-bottom: 20px;
+    }
+    .dialog-input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+    .dialog-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .dialog-button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .dialog-ok {
+      background-color: #4285f4;
+      color: white;
+    }
+    .dialog-cancel {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <div id="alert-dialog" class="dialog-overlay" style="display: none;">
+    <div class="dialog-box">
+      <div class="dialog-message" id="alert-message"></div>
+      <div class="dialog-buttons">
+        <button id="alert-ok" class="dialog-button dialog-ok">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="confirm-dialog" class="dialog-overlay" style="display: none;">
+    <div class="dialog-box">
+      <div class="dialog-message" id="confirm-message"></div>
+      <div class="dialog-buttons">
+        <button id="confirm-cancel" class="dialog-button dialog-cancel">Cancel</button>
+        <button id="confirm-ok" class="dialog-button dialog-ok">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="prompt-dialog" class="dialog-overlay" style="display: none;">
+    <div class="dialog-box">
+      <div class="dialog-message" id="prompt-message"></div>
+      <input type="text" id="prompt-input" class="dialog-input" value="">
+      <div class="dialog-buttons">
+        <button id="prompt-cancel" class="dialog-button dialog-cancel">Cancel</button>
+        <button id="prompt-ok" class="dialog-button dialog-ok">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 这些函数将在platform_dialog.ts中被调用
+    function showAlert(message, callback) {
+      const dialog = document.getElementById('alert-dialog');
+      document.getElementById('alert-message').textContent = message;
+      dialog.style.display = 'flex';
+      
+      document.getElementById('alert-ok').onclick = function() {
+        dialog.style.display = 'none';
+        if (callback) callback();
+      };
+    }
+
+    function showConfirm(message, callback) {
+      const dialog = document.getElementById('confirm-dialog');
+      document.getElementById('confirm-message').textContent = message;
+      dialog.style.display = 'flex';
+      
+      document.getElementById('confirm-ok').onclick = function() {
+        dialog.style.display = 'none';
+        callback(true);
+      };
+      
+      document.getElementById('confirm-cancel').onclick = function() {
+        dialog.style.display = 'none';
+        callback(false);
+      };
+    }
+
+    function showPrompt(message, defaultValue, callback) {
+      const dialog = document.getElementById('prompt-dialog');
+      document.getElementById('prompt-message').textContent = message;
+      const input = document.getElementById('prompt-input');
+      input.value = defaultValue;
+      dialog.style.display = 'flex';
+      
+      document.getElementById('prompt-ok').onclick = function() {
+        dialog.style.display = 'none';
+        callback(input.value);
+      };
+      
+      document.getElementById('prompt-cancel').onclick = function() {
+        dialog.style.display = 'none';
+        callback(null);
+      };
+    }
+
+    // 暴露给外部使用的接口
+    window.customDialog = {
+      alert: showAlert,
+      confirm: showConfirm,
+      prompt: showPrompt
+    };
+  </script>
+</body>
+</html>

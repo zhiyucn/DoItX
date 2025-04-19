@@ -334,7 +334,7 @@ export function text_prompt_ext(
     // External message.
     msg = generator.valueToCode(block, 'TEXT', Order.NONE) || "''";
   }
-  let code = 'Html.window.prompt(' + msg + ", '')";
+  let code = 'CustomDialog.prompt(' + msg + ", '', function(result) { return result; })";
   const toNumber = block.getFieldValue('TYPE') === 'NUMBER';
   if (toNumber) {
     // TODO(#7600): find better approach than casting to any to override
