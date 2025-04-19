@@ -1,0 +1,17 @@
+{
+  "name": "doit-web",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "tauri dev",
+    "build": "tauri build",
+    "dev": "http-server --port 1430",
+    "kill-port": "FOR /F \"tokens=5\" %p IN ('netstat -ano ^| findstr :1430') DO taskkill /F /PID %p"
+  },
+  "dependencies": {
+    "sweetalert2": "^11.19.1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
