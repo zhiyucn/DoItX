@@ -1,13 +1,12 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "DoItX",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "identifier": "com.zhiyu.doitx",
   "build": {
-    "frontendDist": "..",
-
+    "frontendDist": "../dist",
     "beforeDevCommand": "",
-    "beforeBuildCommand": "npm run build"
+    "beforeBuildCommand": ""
   },
   "app": {
     "windows": [

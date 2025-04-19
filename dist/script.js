@@ -203,7 +203,7 @@ function toggleTheme() {
 }
 
 function showAboutSoftware() {
-    alert('DoItX! - 放手去做!\n版本: 1.0.0 GPLv2');
+    alert('DoItX! - 放手去做!\n版本: 0.0.1 GPLv2');
 }
 // 添加我的二改信息 2025/4/20 UTC+8 zhiyucn
 function showAboutDeveloper() {
