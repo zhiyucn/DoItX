@@ -19,3 +19,5 @@ local_build/local_*_compressed.js
 chromedriver
 build/
 temp/
+/target/
+/gen/schemas

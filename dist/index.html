@@ -6,11 +6,23 @@
   <title>DoItX</title>
   <link rel="icon" href="icon.svg">
   <link rel="stylesheet" href="style.css">
-  <script src="blockly.min.js"></script>
-  <script src="blocks.js"></script>
+  <!-- 注入vConsole -->
+  <script src="https://cdn.jsdelivr.net/npm/vconsole@latest/dist/vconsole.min.js"></script>
+  <script>
+    const vConsole = new vConsole();
+  </script>
+  <script src="blockly_compressed.js"></script>
+  <script src="blocks_compressed.js"></script>
   <script src="python_compressed.js"></script>
   <script src="zh-hans.js"></script>
+  <script src="blocks/python_list.js"></script>
+  <script src="blocks/python_dict.js"></script>
+  <script src="blocks/python_io.js"></script>
+  <script src="blocks/python_string.js"></script>
+  <script src="python_compressed.js"></script>
+  <script src="blocks/python_xblock.js"></script>
 </head>
+
 <body>
   <div class="toolbar">
     <div class="toolbar-title">
@@ -145,13 +157,16 @@
       <block type="python_list_set"></block>
       <block type="python_list_sort"></block>
     </category>
+    <category name="Xblock" colour="260">
+      <block type="get_time"></block>
+    </category>
   </xml>
 
   <script src="blocks/python_list.js"></script>
   <script src="blocks/python_dict.js"></script>
   <script src="blocks/python_io.js"></script>
   <script src="blocks/python_string.js"></script>
-
+  <script type="module" src="blocks/python_xblock.js"></script>
   <script src="theme/day_theme.js"></script>
   <script src="theme/night_theme.js"></script>
 

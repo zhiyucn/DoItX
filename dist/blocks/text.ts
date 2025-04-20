@@ -30,7 +30,12 @@ import type {Workspace} from '../core/workspace.js';
  * A dictionary of the block definitions provided by this module.
  */
 export const blocks = createBlockDefinitionsFromJsonArray([
-  // Block for text value
+  {
+    'output': 'String',
+    'style': 'text_blocks',
+    'tooltip': '获取用户输入并返回字符串',
+    'helpUrl': 'https://docs.python.org/3/library/functions.html#input'
+  },
   {
     'type': 'text',
     'message0': '%1',

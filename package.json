@@ -12,6 +12,7 @@
     "sweetalert2": "^11.19.1"
   },
   "devDependencies": {
+    "@types/node": "^22.14.1",
     "http-server": "^14.1.1"
   }
 }
